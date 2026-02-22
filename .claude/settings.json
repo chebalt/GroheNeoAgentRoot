@@ -1,0 +1,10 @@
+{
+  "defaultMode": "acceptEdits",
+  "permissions": {
+    "allow": [
+      "Bash(docker *)",
+      "Bash(git *)",
+      "Bash(.venv/Scripts/python.exe *)"
+    ]
+  }
+}
