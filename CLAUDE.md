@@ -12,6 +12,8 @@ Full-stack headless e-commerce + content platform for GROHE (bathroom/kitchen fi
 | `grohe-neo-sitecore-xm-cloud` | `NEO/grohe-neo-sitecore-xm-cloud/` | Sitecore XM Cloud, C# resolvers |
 | `grohe-neo-websites` | `NEO/grohe-neo-websites/` | Next.js 16, React 19, pnpm monorepo |
 
+**Feature quick-reference:** `docs/features/` — one .md per feature (architecture, data flow, key files, gotchas, ticket patterns).
+
 **Environments:** QA (testing) → UAT (staging) → PROD
 **Cloud:** Google Cloud (Cloud Run, Firestore, Secret Manager, Cloud Build)
 **CMS:** Sitecore XM Cloud + Sitecore Search
