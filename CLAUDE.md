@@ -8,7 +8,7 @@ Full-stack headless e-commerce + content platform for GROHE (bathroom/kitchen fi
 |---|---|---|
 | `grohe-neo-data-loader` | `NEO/grohe-neo-data-loader/` | Python 3.13, ETL, Firestore, Google Drive |
 | `grohe-neo-services` | `NEO/grohe-neo-services/` | .NET 8 microservices, Google Cloud Run |
-| `integration` | `NEO/integration/` | pytest, Firestore emulator — cross-project test harness (Phase 1–5 ✅: 71 tests) |
+| `integration` | `NEO/integration/` | pytest, Firestore emulator — cross-project test harness (Phase 1–6 ✅: 81 tests) |
 | `grohe-neo-sitecore-xm-cloud` | `NEO/grohe-neo-sitecore-xm-cloud/` | Sitecore XM Cloud, C# resolvers |
 | `grohe-neo-websites` | `NEO/grohe-neo-websites/` | Next.js 16, React 19, pnpm monorepo |
 
