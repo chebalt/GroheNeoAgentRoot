@@ -14,6 +14,11 @@ Full-stack headless e-commerce + content platform for GROHE (bathroom/kitchen fi
 
 **Feature quick-reference:** `docs/features/` — one .md per feature (architecture, data flow, key files, gotchas, ticket patterns).
 
+**Multi-agent workflow:** `agents/` — dev-agent.md + test-agent.md. Handoff files in `reports/`.
+See `agents/README.md` for the full two-agent protocol.
+
+**Claude Code native subagents** (`.claude/agents/`): `grohe-neo-dev` (implementation across all 4 repos, uses Claude Opus) and `neo-qa-engineer` (test validation, never modifies source). Invoked automatically via the Agent tool based on task type.
+
 **Environments:** QA (testing) → UAT (staging) → PROD
 **Cloud:** Google Cloud (Cloud Run, Firestore, Secret Manager, Cloud Build)
 **CMS:** Sitecore XM Cloud + Sitecore Search
