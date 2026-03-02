@@ -14,7 +14,7 @@ Full-stack headless e-commerce + content platform for GROHE (bathroom/kitchen fi
 
 **Feature quick-reference:** `docs/features/` — one .md per feature (architecture, data flow, key files, gotchas, ticket patterns).
 
-**Multi-agent workflow:** `.claude/agents/` — `grohe-neo-dev` (implementation across all 4 repos) and `neo-qa-engineer` (test validation, never modifies source). Both use Claude Opus and are invoked automatically via the Agent tool. Just describe a task in the chat — the orchestrator chains them.
+**Multi-agent workflow:** `.claude/agents/` — `grohe-neo-dev` (implementation across all 4 repos) and `neo-qa-engineer` (test validation, never modifies source). Both use Claude Opus and are invoked automatically via the Agent tool. Before implementing, the dev agent identifies the relevant feature and reads `docs/features/<feature>.md`, then passes the feature name to the QA agent so it can load the same context before testing. Just describe a task in the chat — the orchestrator chains them.
 
 **Environments:** QA (testing) → UAT (staging) → PROD
 **Cloud:** Google Cloud (Cloud Run, Firestore, Secret Manager, Cloud Build)
