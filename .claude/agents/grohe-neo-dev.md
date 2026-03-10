@@ -223,6 +223,33 @@ All resolvers: implement `IRenderingContentsResolver`, return `JObject`, handle 
 - Follow existing YAML serialization format exactly when adding templates, renderings, or layouts
 - Reference existing items for ID patterns and field definitions
 
+### ⚠️ CRITICAL: GraphQL ComponentQuery must expose every new field
+
+When adding a new field to a Sitecore template and expecting it to be available on the frontend, you **must** also add it to the rendering item's `ComponentQuery` (`Hint: ComponentQuery` in the rendering YAML under `src/src/items/GroheNeo.Tenant.Renderings.Feature/`).
+
+**Why:** The `ComponentQuery` is the GraphQL query that Sitecore Edge executes for each component. If a field is not listed in the query, it is never returned by the Edge API — the frontend server component will always receive `undefined` for that field, no matter what the Zod schema or component code says.
+
+**Checklist whenever you add a field to a datasource template:**
+
+1. Find the corresponding rendering YAML in `src/src/items/GroheNeo.Tenant.Renderings.Feature/`
+2. Locate the `ComponentQuery` field (hint `ComponentQuery`, field ID `17bb046a-a32a-41b3-8315-81217947611b`)
+3. Add the new field to the query body — following the exact same pattern as the other fields:
+   ```graphql
+   myNewField: field(name: "MyNewField") {
+     definition {
+       id
+     }
+     __typename
+     jsonValue
+   }
+   ```
+4. Bump the query name version (e.g. `V3` → `V4`) so Sitecore Edge invalidates its cache
+5. Verify the frontend Zod schema includes the matching field name
+
+**Finding the rendering YAML:** search for the component name or its rendering ID in `src/src/items/GroheNeo.Tenant.Renderings.Feature/`. The rendering item's `componentName` SharedField tells you which frontend component it maps to.
+
+**Failure mode if skipped:** The field will appear to be wired up correctly end-to-end (template field exists, Zod schema has it, server component reads it) but will always be `undefined` at runtime — a silent data gap that only surfaces during QA testing.
+
 ---
 
 ## grohe-neo-websites Conventions
@@ -329,6 +356,12 @@ When a change affects multiple repos, follow this checklist:
 - [ ] services: Add Firestore abstraction, new API endpoint if needed
 - [ ] integration tests: Add collection assertions
 
+**New Sitecore template field (exposed to frontend):**
+- [ ] Add field item YAML under the datasource template in `src/src/items/GroheNeo.Tenant.Templates.Feature/`
+- [ ] **Add the field to the rendering's `ComponentQuery`** in `src/src/items/GroheNeo.Tenant.Renderings.Feature/` — bump query version (V3→V4 etc.)
+- [ ] Add field to the Zod schema in the frontend server component (`JssDatasourcePropsSchema.extend`)
+- [ ] Read the field value and pass it down the component tree to where it is needed
+
 **New .NET service:**
 - [ ] Add service project to `GroheNeoServices.sln`
 - [ ] Implement `AddProjectDependencies` DI extension
@@ -348,6 +381,29 @@ Before considering any task complete:
 4. **Lint clean** — Biome rules satisfied for websites, xUnit naming for services
 5. **Cross-repo impact assessed** — identified all repos affected and updated them
 6. **No hardcoded secrets or env vars** — use Secret Manager / @grohe/env patterns
+
+### Mandatory pre-handoff check — grohe-neo-websites
+
+**You MUST run the following command after all frontend changes and fix ALL errors before handing off to QA:**
+
+```bash
+cd C:/projects/grohe/NEO/grohe-neo-websites
+pnpm turbo biome:check type:check test:coverage
+```
+
+This runs:
+- **Biome** — lint + format check across all 46 packages (0 errors required)
+- **TypeScript** — full type check across all packages (0 errors required)
+- **Vitest** — unit test coverage (all tests must pass)
+
+Fix all errors found before passing the handoff block to the QA agent. Do not hand off if any of these three checks fail.
+
+> **Known Windows quirk:** `@grohe/icons:setup` may fail during turbo (svg glob doesn't expand in cmd.exe). This is pre-existing and not a regression — ignore it if the only failure is in `@grohe/icons:setup` and all other packages pass.
+
+For .NET services, run the relevant test project(s) before handoff:
+```bash
+dotnet test src/GroheNeo.<ServiceName>Tests/<ServiceName>Tests.csproj --verbosity normal
+```
 
 ---
 
