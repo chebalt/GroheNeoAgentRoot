@@ -11,21 +11,19 @@ project_context: |
 # The expertise field is what Claude uses to make routing decisions — be descriptive.
 
 team:
-  # - name: "Artsiom Dylevich"
-  #   account_id: "712020:1657ccbf-b182-4675-a9e2-a4ffe9ab078c"
-  #   expertise: |
-  #     Sitecore XM Cloud: publishing, workflows, roles/permissions, autopublishing.
-  #     Data-loader (Python ETL pipeline). DevOps and Cloud Run deployment.
-  #     Firestore data architecture. Search indexing (Sitecore Search).
+   - name: "Artsiom Dylevich"
+     account_id: "712020:1657ccbf-b182-4675-a9e2-a4ffe9ab078c"
+     expertise: |
+       Sitecore XM Cloud: publishing, workflows, roles/permissions, autopublishing.
+       Data-loader (Python ETL pipeline).
+       Firestore data architecture. Project List. 
 
-  # - name: "Lukas Dvorak"
-  #   account_id: "60250e19692da10070fa31e2"
-  #   expertise: |
-  #     Frontend (Next.js, React). Vercel caching and revalidation.
-  #     Cache strategy. Technical item publishing (navigation, footer, dictionaries).
-
-  # - name: "Person Name"
-  #   account_id: "JIRA_ACCOUNT_ID"
-  #   expertise: |
-  #     Short description of what this person works on.
-  #     Be specific — topics, technologies, components they own.
+   - name: "Lukas Dvorak"
+     account_id: "60250e19692da10070fa31e2"
+     expertise: |
+       Backend, Google Cloud Run, Load Balancer, Load Balancer Redirect service, Search indexing (Sitecore Search).
+       
+   - name: "Sergiu Bretan"
+     account_id: "712020:42ea6231-4959-433a-8d64-76f4c331054f"
+     expertise: |
+       Forms. Shopping Cart. Store Locator. User Registration.

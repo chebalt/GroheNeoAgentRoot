@@ -10,13 +10,13 @@ class JiraClient:
 
     def search_issues(self, jql: str, max_results: int = 50) -> list[dict]:
         """Fetch issues matching a JQL query."""
-        url = f"{self.base_url}/rest/api/3/search"
-        params = {
+        url = f"{self.base_url}/rest/api/3/search/jql"
+        payload = {
             "jql": jql,
             "maxResults": max_results,
-            "fields": "summary,description,issuetype,status,priority,labels,components",
+            "fields": ["summary", "description", "issuetype", "status", "priority", "labels", "components"],
         }
-        response = requests.get(url, headers=self.headers, auth=self.auth, params=params)
+        response = requests.post(url, headers=self.headers, auth=self.auth, json=payload)
         response.raise_for_status()
         return response.json().get("issues", [])
 
