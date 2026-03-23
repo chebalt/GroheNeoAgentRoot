@@ -10,7 +10,10 @@
       "mcp__plugin_context7_context7__resolve-library-id",
       "mcp__plugin_context7_context7__query-docs",
       "mcp__atlassian__getJiraIssue",
-      "mcp__atlassian__updateConfluencePage"
+      "mcp__atlassian__updateConfluencePage",
+      "mcp__atlassian__fetch",
+      "Bash(pnpm vitest:*)",
+      "Bash(pnpm biome:*)"
     ]
   }
 }

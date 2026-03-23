@@ -25,7 +25,18 @@
       "Bash(FIRESTORE_EMULATOR_HOST=localhost:8080:*)",
       "Bash(GIT_EDITOR=true:*)",
       "Bash(rm:*)",
-      "Bash(claude mcp:*)"
+      "Bash(claude mcp:*)",
+      "mcp__atlassian__getJiraIssue",
+      "mcp__atlassian__fetch",
+      "mcp__atlassian__search",
+      "Read(//c/Users/artsi/.claude/**)",
+      "Read(//c/Users/artsi/**)",
+      "WebFetch(domain:lixilg.atlassian.net)",
+      "mcp__atlassian__addCommentToJiraIssue",
+      "mcp__atlassian__searchJiraIssuesUsingJql",
+      "mcp__atlassian__editJiraIssue",
+      "Bash(sort -t' ' -k2 -n)",
+      "Bash(sort -k2 -n)"
     ]
   }
 }
